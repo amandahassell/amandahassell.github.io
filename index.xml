@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chris Turner</title>
+    <title>Amanda Hassell</title>
     <link>/</link>
-    <description>Recent content on Chris Turner</description>
+    <description>Recent content on Amanda Hassell</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Project 1</title>
+      <title>Python How To in R Studio</title>
+      <link>/post/2021/05/09/new-blog-post/</link>
+      <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/05/09/new-blog-post/</guid>
+      <description>Here are a few quick tips about using Python in R Studio.
+This next chunk shows how R and python code can be used together in R studio using the reticulate package:
+R code:
+library(reticulate) hello&amp;lt;- &amp;quot;Python&amp;quot; Python code:
+world = &amp;quot;is fun and easy&amp;quot; print(r.hello,world) ## Python is fun and easy You can also use Python as a calculator, just like you can with R. In python, values are assigned with “=” rather than an arrow “&amp;lt;-”.</description>
+    </item>
+    
+    <item>
+      <title>Project1AJH</title>
       <link>/project/project1/</link>
-      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project/project1/</guid>
-      <description> Test Project 1  </description>
+      <description>## paste this chunk into the ```{r setup} chunk at the top of your project 1 .Rmd file knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = &amp;quot;center&amp;quot;, warning = F, message = F, tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100)) Introduction: The two datasets I chose (college_recent_grads and college_all_ages) from fivethirtyeight both show data on recent college graduates across the 173 college majors. The majors all have a major code and are divided into major categories based on the nature of their studies.</description>
     </item>
     
     <item>
-      <title>Project 2</title>
+      <title>Project2ajh4539</title>
       <link>/project/project2/</link>
-      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project/project2/</guid>
-      <description> Test Project 2  </description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <description>Introduction:
+ 0. (5 pts) Introduce your dataset and each of your variables (or just your main variables if you have lots) in a paragraph. What are they measuring? How many observations?  library(tidyverse) install.packages(&amp;#39;fivethirtyeightdata&amp;#39;, repos = &amp;#39;https://fivethirtyeightdata.github.io/drat/&amp;#39;, type = &amp;#39;source&amp;#39;) library(fivethirtyeightdata) library(fivethirtyeight) view(bechdel) bechdel2&amp;lt;- na.omit(bechdel) This dataset (bechdel) observes individual movies from 1990-2013. The dataset is based on the Bechdel test, which observes the presence of women in Hollywood movies.</description>
     </item>
     
     <item>
@@ -54,7 +57,11 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/resume/</guid>
-      <description>    </description>
+      <description>AMANDA HASSELL amanda.hassell@utexas.edu
+COLLEGE EDUCATION University of Texas/College of Natural Sciences, BS expected Spring 2021 Major: B.S. Human Biology (Pre-Dental) GPA: 3.988 DAT Score: 23 AA
+Awards: College of Natural Sciences Scholar, Spring 2020 &amp;amp; Spring 2021 College of Natural Sciences Second Year Excellence Award, Spring 2019
+Extracurricular Activities &amp;amp; Campus Involvement:
+Texas Pre-Dental Society Distinguished Member, Spring 2019 – present - Served on the Philanthropy Committee, Spring 2019 Peer Led Undergraduate Studying Facilitator for General Biochemistry at UT Austin, Fall 2019 Global Medical Training Member, Fall 2017 – Fall 2019 Chi Omega Sorority Member, Fall 2017 – present</description>
     </item>
     
   </channel>

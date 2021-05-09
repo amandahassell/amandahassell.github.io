@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Chris Turner</title>
+    <title>Posts on Amanda Hassell</title>
     <link>/post/</link>
-    <description>Recent content in Posts on Chris Turner</description>
+    <description>Recent content in Posts on Amanda Hassell</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Python How To in R Studio</title>
+      <link>/post/2021/05/09/new-blog-post/</link>
+      <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>/post/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/post/2021/05/09/new-blog-post/</guid>
+      <description>Here are a few quick tips about using Python in R Studio.
+This next chunk shows how R and python code can be used together in R studio using the reticulate package:
+R code:
+library(reticulate) hello&amp;lt;- &amp;quot;Python&amp;quot; Python code:
+world = &amp;quot;is fun and easy&amp;quot; print(r.hello,world) ## Python is fun and easy You can also use Python as a calculator, just like you can with R. In python, values are assigned with “=” rather than an arrow “&amp;lt;-”.</description>
     </item>
     
   </channel>

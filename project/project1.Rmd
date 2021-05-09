@@ -1,8 +1,125 @@
 ---
-title: "Project 1"
-author: "Me"
-date: "2020-12-01"
+title: "Project1AJH"
+author: "Amanda Hassell"
+date: "3/31/2021"
 output: html_document
 ---
 
-## Test Project 1
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r eval=F}
+## paste this chunk into the ```{r setup} chunk at the top of your project 1 .Rmd file
+
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F,
+tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100))
+```
+
+Introduction:
+  The two datasets I chose (college_recent_grads and college_all_ages) from fivethirtyeight both show data on recent college graduates across the 173 college majors. The majors all have a major code and are divided into major categories based on the nature of their studies. College_recent_grads has 21 variable columns and college_all_ages has 11 variable columns. Both datasets contain information about employment rates, to what degree graduates are employed, and statistics about their earnings once they are employed. The college_recent_grads has more information about the breakdown of men and women in each major, as well as how many students in each major get jobs that are reaching their degree potential. I chose this data hoping to find associations high-earning majors and majors which are occupied by women. I expect that the higher earning majors will, on average, have a less than 50% female population.  
+
+
+1. Tidying
+```{r}
+library(tidyverse)
+install.packages('fivethirtyeightdata', repos = 'https://fivethirtyeightdata.github.io/drat/', type = 'source')
+library(fivethirtyeightdata)
+library(fivethirtyeight)
+
+college_recent_grads %>% pivot_longer(c("men", "women"), names_to = "gender", values_to= "graduates" ) %>% group_by(major_category) 
+```
+The original two datasets were already tidy, and the dataset that was produced after the join was tidy as well. However, this table demonstrates the use of reshaping functions (pivot_longer) to add separate rows for the male and female graduates in each major. The columns that were formerly called "men" and "women" were combined into a new "gender" column, and the number of each gender graduate for each major is found in the "graduates" column. 
+
+2. Joining
+```{r}
+joinedcollege<- inner_join(college_all_ages, college_recent_grads, by="major_code")
+simplecollege = subset(joinedcollege, select = -c(13,14,15,20,23,24,25,26,27,28))
+simplecollege <- simplecollege[-5,]
+
+```
+In order to join the two datasets (college_all_ages and college_recent_grads), an inner join was used. The datasets were joined by the "major_code" variable, but had 11 total variables (columns) in common. Therefore, 10 of the variables in the new dataset were exact duplicates and were dropped using the subset function. Each of the orgiinal two datasets had 173 observations, and the new, joined dataset  has 172 observations. The food science major was the only observation removed, as it was the only observation that did not have data for three variables: men, women, and sharewomen. 
+
+3. Wrangling
+```{r}
+#This table shows the average median incomes for each major category, and reveals that engineering has the highest median income as a major category, at $77,758.62 per year. 
+simplecollege %>% group_by(major_category.x) %>% mutate(mean(median.x)) %>% summarize(mean(median.x)) 
+
+#The following table shows the rankings of the engineering majors, ranked in order of descending median income. Since engineering has the highest median income as a major category, petroleum engineering is found to be the highest earning major overall. 
+simplecollege %>% filter(major_category.x == "Engineering") %>% arrange(rank)
+
+#The following table shows the average unemployment rate for each major category. The arts majors have the highest unemployment rate after graduation, at 8.76%, and Psychology & Social Work has the second highest unemployment rate, at 7.8%
+simplecollege %>% group_by(major_category.x) %>% summarize(mean(unemployment_rate.x))
+
+#This table gives the average percentage of women by major category. Results of this statistic are shown and explained in the Visualizing section. 
+simplecollege %>% group_by(major_category.x) %>% select(c(3,16)) %>% mutate(mean(sharewomen)) %>% arrange(desc(mean(sharewomen)))
+
+#The median percentage of women in each major across all college graduates is 53.4%, while the median percentage of women in majors in the top 10 ranked majors (by median earnings) was much lower, at only 14.9%. 
+simplecollege %>% summarize(median(sharewomen))
+simplecollege %>% filter(rank < 11) %>% summarize(median(sharewomen))
+
+#The following code chunk (next 10 tables) gives summary statistics for 10 numeric variables. 
+simplecollege %>% summarize(mean(unemployment_rate.x), sd(unemployment_rate.x), quantile(unemployment_rate.x), min(unemployment_rate.x), max(unemployment_rate.x)) #The average unemployment rate across all of the recent college graduates is 5.74%.
+simplecollege %>% summarize(mean(sharewomen), sd(sharewomen), quantile(sharewomen), min(sharewomen), max(sharewomen)) #The study population of college graduates includes 52.2% women.  
+simplecollege %>% summarize(mean(employed.x), sd(employed.x), quantile(employed.x), min(employed.x), max(employed.x)) #
+simplecollege %>% summarize(mean(unemployed.x), sd(unemployed.x), quantile(unemployed.x), min(unemployed.x), max(unemployed.x))
+simplecollege %>% summarize(mean(employed_fulltime_yearround.x), sd(employed_fulltime_yearround.x), quantile(employed_fulltime_yearround.x), min(employed_fulltime_yearround.x), max(employed_fulltime_yearround.x))
+simplecollege %>% summarize(mean(low_wage_jobs), sd(low_wage_jobs), quantile(low_wage_jobs), min(low_wage_jobs), max(low_wage_jobs))
+simplecollege %>% summarize(mean(college_jobs), sd(college_jobs), quantile(college_jobs), min(college_jobs), max(college_jobs))
+simplecollege %>% summarize(mean(employed_fulltime), sd(employed_fulltime), quantile(employed_fulltime), min(employed_fulltime), max(employed_fulltime))
+simplecollege %>% summarize(mean(employed_parttime), sd(employed_parttime), quantile(employed_parttime), min(employed_parttime), max(employed_parttime))
+simplecollege %>% summarize(mean(p75th.x), sd(p75th.x), quantile(p75th.x), min(p75th.x), max(p75th.x))
+
+```
+*Note: Interesting summary statistic descriptions are discussed and summarized along with their corresponding code chuncks above. 
+
+4. Visualizing
+```{r}
+library(ggplot2)
+
+#heatmap
+simplecollege %>% select_if(is.numeric) %>% cor %>% as.data.frame %>% rownames_to_column %>% pivot_longer(-1) %>% ggplot(aes(rowname, name, fill = value)) + geom_tile() + theme(axis.text.x = element_text(angle = 45, vjust = 1)) + geom_text(aes(label=round(value,2), size = 1))+ xlab("")+ylab("")+coord_fixed() + scale_fill_gradient2(low = "red", high = "green", mid = "white", midpoint = 0, limit = c(-1,1), name = "Correlation") + ggtitle("Correlation of Numeric Variables")
+
+#plot 2
+ggplot(simplecollege, aes(x= major_category.x, y=median.x, color=major_category.x)) +geom_boxplot() + theme(axis.text.x = element_text(angle = 45, vjust = 1)) + ggtitle("Median Income by Major Category") + xlab("Major Category") + ylab("Median Income of Full-time Employed Graduates") + scale_fill_hue(l=40, c=35) 
+
+#plot 3
+ggplot(simplecollege, aes(x=major_category.x, color=major_category.x))+ geom_bar(aes(y=sharewomen), stat = "summary", fun=mean) +theme(axis.text.x = element_text(angle = 45, vjust = 1)) + ggtitle("Percentage of Women in Each Major Category") + ylab("Percentage of Women") + xlab("Major Category") + scale_y_continuous(breaks = seq(0,1,0.1))
+
+```
+
+The heatmap demonstrates negative and postitive correlations between numeric variables in this dataset. Positive correlations are indicated by a more green box, while negative correlations are shown in red. One interesting negative correlation shown in the plot is that between sharewomen, or the percentage of women in each major, and the median income in each major. This means that women are less likely to be in majors with higher median incomes. The majors with higher median incomes are primarily occupied with male graduates. 
+
+The second plot shows a boxplot of the median income of all employed graduates grouped based on major category. From this plot, you can see that the Engineering category stands out as having the highest median income, with Computers & Mathematics coming in second. Lower median income major categories include the arts, interdisciplinary studies, education, and psychology & social work. 
+
+The third plot shows the average percentage of women graduates in each major, grouped by major category. Interestingly, the major category with the highest median income (shown above in plot 2) also has the lowest percentage of women. Computers and Mathematics, the second highest median earning major category (found in plot2), is also the category with the second lowest percentage of women. Majors with the highest percentages of women, at almost 80% women, include health majors and Psychology & Social Work majors. 
+
+5. Dimensionality Reduction 
+```{r}
+clustdat<- simplecollege %>% select(c(10,16)) #This selects two variables (median income and percentage of women) from the simplecollege dataset and creates a new dataset that can be used in the k-means clustering.
+kmeans1 <- clustdat %>% kmeans(2) #This creates the kmeans dataset for the two selected variables from the simplecollege dataset
+
+kmeans1$size #This shows the sizes of each cluster.
+kmeans1$centers #This shows the centers of the two clusters.
+kmeans1$cluster #This shows which cluster each observation is in (this is later added to the clustdat dataset as a new variable).
+kmeans1$betweenss 
+kmeans1$tot.withinss
+
+kmeansclust <- clustdat %>% mutate(cluster=as.factor(kmeans1$cluster)) #This adds the cluster numbers as a new variable to the clustdat dataset. 
+kmeansclust %>% ggplot(aes(median.x, sharewomen, color = cluster)) +geom_point() +ggtitle("K-means Clustering on Plot of Median Income vs. Percentage of Women") +xlab("Median Income") +ylab("Percentage of Women")
+
+
+library(cluster)
+sil_width<-vector() #This is an empty vector to hold mean silhouette width.
+for(i in 2:10){
+kms <- kmeans(clustdat,centers=i) #This finds the kmeans for the clustdat dataset, and creates an item for it. 
+sil <- silhouette(kms$cluster,dist(clustdat)) #This creates and item for silhouette widths
+sil_width[i]<-mean(sil[,3]) #This takes the averages of the silhouette widths.
+}
+ggplot()+geom_line(aes(x=1:10,y=sil_width))+scale_x_continuous(name="k",breaks=1:10)
+
+#This plot allows for a visualization of the average silhouette widths for different cluster numbers. The highest average silhouette width is for two clusters, although three is a close second. Therefore, two is the optimal number of clusters for this plot. 
+
+```
+
+This plot demonstrates the negative correlation between the Percentage of Women in each major and the median income of full-time employed graduates of each major. The clustering plot highlights the discrepancy between majors with a large percentage of women and those without. The red cluster consists of majors with lower median incomes and majors with mostly near-equal or higher percentages of women than men. Almost all of the blue cluster, higher earning cluster, however, has less than 50% women, and many with less than 25% women. 

@@ -1,0 +1,33 @@
+---
+title: Python How To in R Studio
+author: ''
+date: '2021-05-09'
+slug: new-blog-post
+categories: []
+tags: []
+description: ''
+---
+Here are a few quick tips about using Python in R Studio. 
+
+This next chunk shows how R and python code can be used together in R studio using the reticulate package:
+
+R code:
+```{r}
+library(reticulate)
+hello<- "Python"
+```
+Python code:
+```{python}
+world = "is fun and easy"
+print(r.hello,world)
+```
+You can also use Python as a calculator, just like you can with R. In python, values are assigned with "=" rather than an arrow "<-". 
+
+```{python}
+this = 2000
+year = 21
+this + year
+```
+
+![](/post/2021-05-09-new-blog-post_files/reticulated_python.png)
+

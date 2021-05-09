@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Chris Turner</title>
+    <title>Projects on Amanda Hassell</title>
     <link>/project/</link>
-    <description>Recent content in Projects on Chris Turner</description>
+    <description>Recent content in Projects on Amanda Hassell</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-US</language><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Project 1</title>
+      <title>Project1AJH</title>
       <link>/project/project1/</link>
-      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project/project1/</guid>
-      <description> Test Project 1  </description>
+      <description>## paste this chunk into the ```{r setup} chunk at the top of your project 1 .Rmd file knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = &amp;quot;center&amp;quot;, warning = F, message = F, tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100)) Introduction: The two datasets I chose (college_recent_grads and college_all_ages) from fivethirtyeight both show data on recent college graduates across the 173 college majors. The majors all have a major code and are divided into major categories based on the nature of their studies.</description>
     </item>
     
     <item>
-      <title>Project 2</title>
+      <title>Project2ajh4539</title>
       <link>/project/project2/</link>
-      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project/project2/</guid>
-      <description> Test Project 2  </description>
+      <description>Introduction:
+ 0. (5 pts) Introduce your dataset and each of your variables (or just your main variables if you have lots) in a paragraph. What are they measuring? How many observations?  library(tidyverse) install.packages(&amp;#39;fivethirtyeightdata&amp;#39;, repos = &amp;#39;https://fivethirtyeightdata.github.io/drat/&amp;#39;, type = &amp;#39;source&amp;#39;) library(fivethirtyeightdata) library(fivethirtyeight) view(bechdel) bechdel2&amp;lt;- na.omit(bechdel) This dataset (bechdel) observes individual movies from 1990-2013. The dataset is based on the Bechdel test, which observes the presence of women in Hollywood movies.</description>
     </item>
     
   </channel>
